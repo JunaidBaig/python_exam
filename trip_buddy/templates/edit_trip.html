@@ -33,9 +33,9 @@
             <label for="destination">Destination: </label>
             <input class="form-control" type="text" name="dest" value="{{ trip.destination }} ">
             <label for="start date ">Start Date: </label>
-            <input class="form-control" type="date" name="start_date" placeholder="{{ trip.start_date }}">
+            <input class="form-control" type="date" name="start_date" value="{{ trip.start_date|safe }}">
             <label for="end date ">End Date: </label>
-            <input class="form-control" type="date" name="end_date" value="{{ trip.end_date }}">
+            <input class="form-control" type="date" name="end_date" value="{{ trip.end_date|safe }}">
             <label for="plan">Plan: </label>
             <textarea class="form-control" name="plan" cols=100% rows="5"> {{ trip.plan }}</textarea>
 
@@ -43,7 +43,8 @@
             <a href="/dashboard" class="btn btn-primary">Cancel</a>
         </form>
     </div>
-
+    <p>{{trip.start_date}}</p>
+    <p>{{trip.end_date}}</p>
 
 </body>
 

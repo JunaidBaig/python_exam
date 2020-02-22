@@ -91,23 +91,23 @@ class TripManager(models.Manager):
             err_message.append("Please enter Start Date")
         elif len(postData['start_date']) == 10:
             start_date = datetime.strptime(postData['start_date'], '%Y-%m-%d')
+            if start_date:
+                start_date = start_date.date()
+            if start_date < date.today():
+                err_message.append('Start date must be today or in the future.')
+
         if len(postData['end_date']) < 10:
             err_message.append("Please enter End Date")
         elif len(postData['end_date']) == 10:
             end_date = datetime.strptime(postData['end_date'], '%Y-%m-%d')
-
-
-        if start_date:
-            start_date = start_date.date()
-            if start_date < date.today():
-                err_message.append('Start date must be today or in the future.')
-
-        if end_date:
-            end_date = end_date.date()
+            if end_date:
+                end_date = end_date.date()
             if end_date < date.today():
                 err_message.append('End date must be today or in the future.')
 
-        if start_date and end_date:
+        if len(postData['end_date']) < 10 or len(postData['start_date']) < 10:
+            print('error')
+        else:
             if start_date > end_date:
                 err_message.append('End date must be after or the same as start date.')
         return err_message
