@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>View Trip</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar" class="d-inline" style="border-bottom: solid black 2px;">
+        <h1>Hello, {{ request.session.first_name }}! Read about this trip!</h1>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout"> logout</a>
+    </nav>
+
+    <div class="container">
+        <h5>{{ trip.destination}}</h5>
+        <table class="table">
+            <p>Start Date: {{trip.start_date}}</p>
+            <p>End Date: {{trip.end_date}}</p>
+            <p>Created On: {{trip.created_at}}</p>
+            <p>Updated On: {{trip.updated_at}}</p>
+            <p>Plan: {{trip.plan}}</p>
+            <p>Created By: {{ trip.created_by.first_name}}</p>
+    </div>
+    </table>
+    <div>
+        <h5>People who've joined the trip:</h5>
+        {% for user in trip.user_id.all%}
+        <ul>
+            {% if trip.created_by != user %}
+            <li>{{user.first_name}}</li>
+            {% endif %}
+        </ul>
+        {% endfor %}
+    </div>
+</body>
+
+</html>

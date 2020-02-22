@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Home</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome! Let's travel</h1>
+
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %} {% if message.tags == 'success' %}
+            <div class="alert alert-success alert-dismissable">
+                <a href='' class="close" data-dismiss='alert' aria-label='close'>x</a> {{ message }}
+            </div>
+            {% else %}
+            <div class="alert alert-danger alert-dismissable">
+                <a href='' class="close" data-dismiss='alert' aria-label='close'>x</a> {{ message }}
+            </div>
+            {% endif %} {% endfor %}
+        </div>
+        {% endif %}
+        <div class="row">
+            <div class="col">
+                <h2>Register:</h2>
+                <form action="/register" method="post">
+                    {% csrf_token %}
+                    <label for="first_name">First Name:</label>
+                    <input class="form-control" type="text" name="first_name">
+                    <label for="last_name">Last Name:</label>
+                    <input class="form-control" type="text" name="last_name">
+                    <label for="email">Email:</label>
+                    <input class="form-control" type="email" name="email">
+                    <label for="birthday">Birthday:</label>
+                    <input class="form-control" type="date" name="birthday">
+
+                    <label for="password">Password:</label>
+                    <input class="form-control" type="password" name="password">
+                    <label for="password_confirm">Confirm Password:</label>
+                    <input class="form-control" type="password" name="password_confirm">
+                    <input type="submit" value="Register" class="btn btn-primary">
+                </form>
+            </div>
+            <div class="col">
+                <h2>Login:</h2>
+                <form action="/login" method="post">
+                    {% csrf_token %}
+                    <label for="email">Email:</label>
+                    <input class="form-control" type="email" name="email">
+                    <label for="password">Password:</label>
+                    <input class="form-control" type="password" name="password">
+                    <input type="submit" value="Login" class="btn btn-primary">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

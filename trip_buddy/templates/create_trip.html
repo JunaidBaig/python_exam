@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>New Trip</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar">
+
+        <h3> Hello {{ request.session.first_name }}! Create a trip!</h3>
+        <a href="/logout"> Logout</a>
+    </nav>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %} {% if message.tags == 'success' %}
+        <div class="alert alert-success alert-dismissable">
+            <a href='' class="close" data-dismiss='alert' aria-label='close'>x</a> {{ message }}
+        </div>
+        {% else %}
+        <div class="alert alert-danger alert-dismissable">
+            <a href='' class="close" data-dismiss='alert' aria-label='close'>x</a> {{ message }}
+        </div>
+        {% endif %} {% endfor %}
+    </div>
+    {% endif %}
+    <div class="container">
+        <form action="/create_trip" method="POST" class="form-group">
+            {% csrf_token %}
+            <label for="destination">Destination: </label>
+            <input class="form-control" type="text" name="dest">
+            <label for="start date">Start Date: </label>
+            <input class="form-control" type="date" name="start_date">
+            <label for="end date">End Date: </label>
+            <input class="form-control" type="date" name="end_date">
+            <label for="plan">Plan: </label>
+            <textarea class="form-control" name="plan" cols=100% rows="5"></textarea>
+
+            <input type="submit" value="Submit" class="btn btn-primary">
+            <a href="/dashboard" class="btn btn-primary">Cancel</a>
+        </form>
+    </div>
+</body>
+
+</html>
